@@ -1,5 +1,6 @@
 # LensPy: Plot millions of datapoints
 [![Documentation Status](https://readthedocs.org/projects/lenspy/badge/?version=latest)](https://lenspy.readthedocs.io/en/latest/?badge=latest)
+[![PyPI](https://img.shields.io/pypi/v/lenspy.svg)](https://pypi.python.org/pypi)
 
 LensPy extends Plotly's Dash to allow you to plot very large datasets (millions of points) while ensuring that figures are still fast, fluid, and responsive.
 
@@ -9,7 +10,7 @@ This is achieved by adjusting the visible data based on the position of the view
 
 ## Features
 
-- Support for the majority Plotly trace types
+- Support for the majority of Plotly trace types
 - Ability to specify number of points to display at once
 - Ability to define a custom function for downsampling data
 - Ability to run in Jupyter notebooks (see Getting Started: Jupyter for more information)
@@ -76,7 +77,7 @@ plot = DynamicPlot(fig, agg_func="avg")
 plot.show()
 ```
 
-The `agg_func` parameter is used by [Panda's GroupBy aggregate method](https://pandas.pydata.org/pandas-docs/stable/reference/api/pandas.core.groupby.DataFrameGroupBy.aggregate.html). Any valid Panda's GroupBy _func_ will work.
+The `agg_func` parameter is used by [Pandas' GroupBy aggregate method](https://pandas.pydata.org/pandas-docs/stable/reference/api/pandas.core.groupby.DataFrameGroupBy.aggregate.html). Any valid Panda's GroupBy _func_ will work.
 
 ### Blocking Plots
 
