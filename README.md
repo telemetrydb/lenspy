@@ -3,7 +3,7 @@
 
 LensPy extends Plotly's Dash to allow you to plot very large datasets (millions of points) while ensuring that figures are still fast, fluid, and responsive.
 
-![alt text](https://github.com/serant/lenspy/blob/main/img/demo.gif?raw=true)
+![alt text](https://github.com/serant/lenspy/blob/master/img/demo.gif?raw=true)
 
 This is achieved by adjusting the visible data based on the position of the viewport and how _zoomed in_ the figure is. When you're zoomed out, only a subset of the data is shown. When you zoom in, LensPy will render more detail in your plot. By doing this, LensPy can build dynamic figures of very large datasets without overwhelming the browser when viewing the figures.
 
