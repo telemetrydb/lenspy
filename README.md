@@ -1,4 +1,4 @@
-# LensPy: Plot millions of datapoints
+# LensPy: Plot millions of data points
 [![Documentation Status](https://readthedocs.org/projects/lenspy/badge/?version=latest)](https://lenspy.readthedocs.io/en/latest/?badge=latest)
 [![PyPI](https://img.shields.io/pypi/v/lenspy.svg)](https://pypi.python.org/pypi)
 
