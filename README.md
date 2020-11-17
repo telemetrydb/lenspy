@@ -1,4 +1,5 @@
 # LensPy: Plot millions of data points
+
 [![Documentation Status](https://readthedocs.org/projects/lenspy/badge/?version=latest)](https://lenspy.readthedocs.io/en/latest/?badge=latest)
 [![PyPI](https://img.shields.io/pypi/v/lenspy.svg)](https://pypi.python.org/pypi)
 
@@ -28,16 +29,24 @@ pip install lenspy
 Use LensPy by passing any [Figure](https://plotly.com/python-api-reference/generated/plotly.graph_objects.Figure.html) to the DynamicPlot constructor.
 
 ```
-fig = go.Figure(
-        data=[go.Scatter(x=df["timestamp"],
-                         y=df["close"],
-                         name="close")])
+import numpy as np
+import plotly.graph_objects as go
+from lenspy import DynamicPlot
 
+# First, let's create a very large figure
+x = np.arange(1, 11, 1e-6)
+y = 1e-2*np.sin(1e3*x) + np.sin(x) + 1e-3*np.sin(1e10*x)
+fig = go.Figure(data=[go.Scattergl(x=x, y=y)])
+fig.update_layout(title=f"{len(x):,} Data Points.")
+
+# Use DynamicPlot.show to view the plot
 plot = DynamicPlot(fig)
 plot.show()
 
 # Plot will be available in the browser at http://127.0.0.1:8050/
 ```
+
+![alt text](https://github.com/serant/lenspy/blob/update_readme/img/demo2.gif?raw=true)
 
 You can still access any of the [Plotly Figure methods/attributes](https://plotly.com/python-api-reference/generated/plotly.graph_objects.Figure.html) and modify them as needed.
 
