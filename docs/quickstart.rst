@@ -80,6 +80,15 @@ The default method for downsampling the graph is to use the *first* point of eac
 The `agg_func` parameter is used by `Pandas' GroupBy aggregate method <https://pandas.pydata.org/pandas-docs/stable/reference/api/pandas.core.groupby.DataFrameGroupBy.aggregate.html>`_. Any valid Panda's GroupBy func will work.
 
 Blocking Plots
---------------
+------------—-
 
 Unlike standard Plotly plots, DynamicPlot.show() is a blocking function. Therefore, if running in a Jupyter notebook, or in a script, the `show` method will block indefinitely.
+
+Supported Trace Types
+————————————————————-
+
+Currently the following Trace Types are supported:
+
+- Scatter
+- Scatter GL
+- Scatter Mapbox

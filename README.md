@@ -22,7 +22,6 @@ This is achieved by adjusting the visible data based on the position of the view
 
 ## Features
 
-- Support for the majority of Plotly trace types
 - Ability to specify number of points to display at once
 - Ability to define a custom function for downsampling data
 - Ability to run in [Jupyter](#jupyter) notebooks
