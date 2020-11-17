@@ -46,7 +46,7 @@ plot.show()
 # Plot will be available in the browser at http://127.0.0.1:8050/
 ```
 
-![alt text](https://github.com/serant/lenspy/blob/main/img/demo2.gif?raw=true)
+![alt text](https://github.com/serant/lenspy/blob/update_readme/img/demo2.gif?raw=true)
 
 You can still access any of the [Plotly Figure methods/attributes](https://plotly.com/python-api-reference/generated/plotly.graph_objects.Figure.html) and modify them as needed.
 
