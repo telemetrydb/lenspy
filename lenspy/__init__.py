@@ -172,7 +172,6 @@ class DynamicPlot():
             for t in fig.data]
 
         self._refresh_traces()
-        self.app = self._build_app()
 
     def set_aggregator(self,
                        agg_func: Optional[Union[str, List, Dict]] = "first",
@@ -198,9 +197,52 @@ class DynamicPlot():
         for trace in self.trace_managers:
             trace.refresh(view_port)
 
-    def _build_app(self) -> dash.Dash:
-        app = dash.Dash()
+    def refine_plot(self, relayoutData) -> go.Figure:
+        rl = relayoutData or {}
 
+        # Cartesian
+        if "xaxis.range[0]" in rl:
+            vw = {
+                "x1": rl.get("xaxis.range[0]"),
+                "x2": rl.get("xaxis.range[1]"),
+
+                "y1": rl.get("yaxis.range[0]"),
+                "y2": rl.get("yaxis.range[1]"),
+
+                "z1": rl.get("zaxis.range[0]"),
+                "z2": rl.get("zaxis.range[1]"),
+            }
+
+        elif "mapbox._derived" in rl:
+            lon1 = min(c[0] for c in rl["mapbox._derived"]["coordinates"])
+            lon2 = max(c[0] for c in rl["mapbox._derived"]["coordinates"])
+
+            lat1 = min(c[1] for c in rl["mapbox._derived"]["coordinates"])
+            lat2 = max(c[1] for c in rl["mapbox._derived"]["coordinates"])
+            vw = {
+                "lon1": lon1,
+                "lon2": lon2,
+                "lat1": lat1,
+                "lat2": lat2,
+            }
+
+            # Update the layout properties
+            new_layout = {
+                k: v for k, v in rl.items() if not any([i.startswith("_") for i in k.split('.')])
+            }
+            self.fig.update_layout(new_layout)
+
+        else:
+            vw = {}
+
+        self._refresh_traces(vw)
+
+        return self.fig
+
+    def show(self, *args, **kwargs):
+        """Displays the plot. All arguments are passed to :meth:`dash.Dash.run_server`
+        """
+        app = dash.Dash()
         log = logging.getLogger('werkzeug')
         log.setLevel(logging.ERROR)
 
@@ -209,55 +251,8 @@ class DynamicPlot():
                       style={"height": "100%", "width": "100%"})
         ], style={"height": "100vh"})
 
-        @ app.callback(
+        app.callback(
             Output("main_plot", "figure"),
             [Input("main_plot", "relayoutData")]
-        )
-        def refine_plot(relayoutData):
-            rl = relayoutData or {}
-
-            # Cartesian
-            if "xaxis.range[0]" in rl:
-                vw = {
-                    "x1": rl.get("xaxis.range[0]"),
-                    "x2": rl.get("xaxis.range[1]"),
-
-                    "y1": rl.get("yaxis.range[0]"),
-                    "y2": rl.get("yaxis.range[1]"),
-
-                    "z1": rl.get("zaxis.range[0]"),
-                    "z2": rl.get("zaxis.range[1]"),
-                }
-
-            elif "mapbox._derived" in rl:
-                lon1 = min(c[0] for c in rl["mapbox._derived"]["coordinates"])
-                lon2 = max(c[0] for c in rl["mapbox._derived"]["coordinates"])
-
-                lat1 = min(c[1] for c in rl["mapbox._derived"]["coordinates"])
-                lat2 = max(c[1] for c in rl["mapbox._derived"]["coordinates"])
-                vw = {
-                    "lon1": lon1,
-                    "lon2": lon2,
-                    "lat1": lat1,
-                    "lat2": lat2,
-                }
-
-                # Update the layout properties
-                new_layout = {
-                    k: v for k, v in rl.items() if not any([i.startswith("_") for i in k.split('.')])
-                }
-                self.fig.update_layout(new_layout)
-
-            else:
-                vw = {}
-
-            self._refresh_traces(vw)
-
-            return self.fig
-
-        return app
-
-    def show(self, *args, **kwargs):
-        """Displays the plot. All arguments are passed to :meth:`dash.Dash.run_server`
-        """
-        self.app.run_server(*args, **kwargs)
+        )(self.refine_plot)
+        app.run_server(*args, **kwargs)
