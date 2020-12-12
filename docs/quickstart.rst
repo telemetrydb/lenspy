@@ -92,6 +92,7 @@ Currently the following Trace Types are supported:
 - Scatter
 - Scatter GL
 - Scatter Mapbox
+- Density Mapbox
 
 Using with Ploty Dash Applications
 ----------------------------------
