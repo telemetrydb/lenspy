@@ -1,6 +1,6 @@
 import plotly.express as px
 import pandas as pd
-from eventful import DynamicPlot
+from lenspy import DynamicPlot
 
 df = pd.read_csv(
     'https://raw.githubusercontent.com/plotly/datasets/master/uber-rides-data1.csv')
