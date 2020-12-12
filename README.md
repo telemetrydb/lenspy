@@ -25,6 +25,7 @@ This is achieved by adjusting the visible data based on the position of the view
 - Ability to specify number of points to display at once
 - Ability to define a custom function for downsampling data
 - Ability to run in [Jupyter](#jupyter) notebooks
+- Ability to use with Dash applications
 
 ## Installation
 
