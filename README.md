@@ -2,6 +2,7 @@
 
 [![Documentation Status](https://readthedocs.org/projects/lenspy/badge/?version=latest)](https://lenspy.readthedocs.io/en/latest/?badge=latest)
 [![PyPI](https://img.shields.io/pypi/v/lenspy.svg)](https://pypi.python.org/pypi)
+![PyPI - Downloads](https://img.shields.io/pypi/dm/lenspy)
 ![PyPI - License](https://img.shields.io/pypi/l/lenspy)
 
 LensPy extends Plotly's Dash to allow you to plot very large datasets (millions of points) while ensuring that figures are still fast, fluid, and responsive.
