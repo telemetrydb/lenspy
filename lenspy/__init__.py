@@ -4,8 +4,8 @@ from multiprocessing import Process
 from typing import Dict, List, Optional, Tuple, Union
 
 import dash
-import dash as dcc
-import dash as html
+from dash import dcc
+from dash import html
 import numpy as np
 import pandas as pd
 import plotly.graph_objects as go
