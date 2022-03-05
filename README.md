@@ -72,7 +72,7 @@ For the full reference and detailed information, please see the [documentation](
 
 ## License
 
-Copyright (c) 2020 Seran Thirugnanam under the MIT License.
+Copyright (c) 2022 Seran Thirugnanam under the MIT License.
 
 ## Contributing
 
