@@ -71,10 +71,11 @@ class TraceManager():
         axis_names = ["x", "y", "z", "lon", "lat"]
         # Add all array type attrs to the dataframe
         for attr_name in dir(trace):
-            if attr_name.startswith("_"):
+            if attr_name.startswith("_") or attr_name == 'colorscale':
                 continue
             attr = getattr(trace, attr_name)
-            if type(attr) in [tuple, list, np.ndarray, pd.Series] and attr_name in axis_names:
+
+            if type(attr) in [tuple, list, np.ndarray, pd.Series]:
                 df[attr_name] = pd.Series(attr)
 
         plot_dimensions = [d for d in axis_names if d in df.columns]
