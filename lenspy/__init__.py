@@ -16,7 +16,7 @@ from plotly.basedatatypes import BaseTraceType
 class TraceManager():
     """Manages the content of a Trace based on the viewport of the :class:`plotly.graph_objects.Figure`.
 
-    Configure the number of points to show at any given time using :param max_points:. ``agg_func``, 
+    Configure the number of points to show at any given time using :param max_points:. ``agg_func``,
     ``agg_args``, and ``agg_kwargs`` are passed directly to :meth:`pd.core.groupby.DataFrameGroupby.aggregate`.
 
     :param trace: The trace to be managed.
@@ -68,18 +68,17 @@ class TraceManager():
         # When building the dataframe, search all the attributes
         # to find the ones that are arrays
         df = pd.DataFrame()
-
+        axis_names = ["x", "y", "z", "lon", "lat"]
         # Add all array type attrs to the dataframe
         for attr_name in dir(trace):
-            if attr_name.startswith("_"):
+            if attr_name.startswith("_") or attr_name == 'colorscale':
                 continue
             attr = getattr(trace, attr_name)
+
             if type(attr) in [tuple, list, np.ndarray, pd.Series]:
-                df[attr_name] = attr
+                df[attr_name] = pd.Series(attr)
 
-        axis_names = ["x", "y", "z", "lon", "lat"]
         plot_dimensions = [d for d in axis_names if d in df.columns]
-
         return df, plot_dimensions
 
     def refresh(self, view_port: Dict[str, Union[int, float]] = {}):
