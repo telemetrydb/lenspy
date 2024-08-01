@@ -1,13 +1,10 @@
 # First let's create a Dash application
-import dash
-import dash_core_components as dcc
-import dash_html_components as html
+from dash import html, Input, Output, Dash, dcc
 import numpy as np
 import plotly.graph_objects as go
-from dash.dependencies import Input, Output
 from lenspy import DynamicPlot
 
-app = dash.Dash()
+app = Dash()
 
 # Now let's make a large plot we want to include in the app
 x = np.arange(1, 11, 1e-6)

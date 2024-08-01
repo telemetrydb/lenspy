@@ -2,13 +2,10 @@ import logging
 from functools import reduce
 from typing import Dict, List, Optional, Tuple, Union
 
-import dash
-from dash import dcc
-from dash import html
+from dash import dcc, html, Dash, Input, Output
 import numpy as np
 import pandas as pd
 import plotly.graph_objects as go
-from dash.dependencies import Input, Output
 from plotly.basedatatypes import BaseTraceType
 
 
@@ -240,7 +237,7 @@ class DynamicPlot():
     def show(self, *args, **kwargs):
         """Displays the plot. All arguments are passed to :meth:`dash.Dash.run_server`
         """
-        app = dash.Dash()
+        app = Dash()
         log = logging.getLogger('werkzeug')
         log.setLevel(logging.ERROR)
 
