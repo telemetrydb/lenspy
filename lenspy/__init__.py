@@ -183,9 +183,9 @@ class DynamicPlot():
         :param agg_kwargs: Keyword arguments to pass to ``agg_func``
         :type agg_kwargs: dict
         """
-        self.agg_func = func
-        self.agg_args = args
-        self.agg_kwargs = kwargs
+        self.agg_func = agg_func
+        self.agg_args = agg_args
+        self.agg_kwargs = agg_kwargs
 
     def _refresh_traces(self, view_port: Dict[str, Union[int, float]] = {}):
         # Resample all traces to maintain the resolution
